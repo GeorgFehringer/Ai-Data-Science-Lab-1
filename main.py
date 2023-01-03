@@ -73,13 +73,13 @@ def validate_move(node, direction):
     x_cords, y_cords = find_pos(0, puzzle)
 
     # check if move is possible
-    if direction == "up" and x_cords > 0 and node.previous_move != "down":
+    if direction == "u" and x_cords > 0 and node.previous_move != "d":
         return True
-    if direction == "down" and x_cords < 2 and node.previous_move != "up":
+    if direction == "d" and x_cords < 2 and node.previous_move != "u":
         return True
-    if direction == "left" and y_cords > 0 and node.previous_move != "right":
+    if direction == "l" and y_cords > 0 and node.previous_move != "r":
         return True
-    if direction == "right" and y_cords < 2 and node.previous_move != "left":
+    if direction == "r" and y_cords < 2 and node.previous_move != "l":
         return True
     else:
         return False
