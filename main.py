@@ -2,15 +2,13 @@ import numpy as np
 
 
 class Node:
-    def __init__(self, g, h, previous_Node, previous_Move, previous_f, puzzle_array):
-        self.previous_Node = previous_Node
-        self.previous_Move = previous_Move
+    def __init__(self, g, h, previous_node, previous_move, previous_f, puzzle_array):
+        self.previous_Node = previous_node
+        self.previous_Move = previous_move
         self.g = g
         self.h = h
         self.previous_f = previous_f
         self.puzzle_array = puzzle_array
-
-
 
 
 def find_pos(number, array):
@@ -40,7 +38,8 @@ def get_manhattan_distance(puzzle_array, goal_array):
     return man_distance
 
 
-def inversions(arr):  # 8-Puzzle are only then solvable, if there is an even number of inversions. Therefore we count them before we try to solve the puzzle
+def inversions(arr):  # 8-Puzzle are only then solvable, if there is an even number of inversions.
+    # Therefore we count them before we try to solve the puzzle
     count = 0
 
     for i in range(0, 9):
@@ -51,7 +50,8 @@ def inversions(arr):  # 8-Puzzle are only then solvable, if there is an even num
     return count
 
 
-def solvability(puzzle):  # For the Inversion Function to work, we need a 1D Array. Because the puzzle is an 2D Array we need to convert the data.
+def solvability(puzzle):  # For the Inversion Function to work, we need a 1D Array.
+    # Because the puzzle is an 2D Array we need to convert the data.
     count = 0
     arr = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
@@ -63,6 +63,23 @@ def solvability(puzzle):  # For the Inversion Function to work, we need a 1D Arr
     inversions_count = inversions(arr)  # After converting the data to a 1D array we can count the number of Inversions
 
     if inversions_count % 2 == 0:  # If there are an even amount of inversions, the puzzle is solvable
+        return True
+    else:
+        return False
+
+
+def validate_move(node, direction):
+    # get coordinates of empty tile, to validate the move into the right direction
+    x_cords, y_cords = find_pos(0, puzzle)
+
+    # check if move is possible
+    if direction == "up" and x_cords > 0 and node.previous_move != "down":
+        return True
+    if direction == "down" and x_cords < 2 and node.previous_move != "up":
+        return True
+    if direction == "left" and y_cords > 0 and node.previous_move != "right":
+        return True
+    if direction == "right" and y_cords < 2 and node.previous_move != "left":
         return True
     else:
         return False
