@@ -79,7 +79,7 @@ def inversions(arr):
     count = 0
 
     for i in range(0, 9):
-        for j in range(i + 1, 9):
+        for j in range(i + 1, 8):
             if arr[j] < arr[i]:
                 count += 1
 
@@ -91,12 +91,13 @@ def solvability(solv):
     # Because the puzzle is an 2D Array we need to convert the data.
     # Input a 3x3 array; output: boolean if the array is solvable
     count = 0
-    arr = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    arr = [0, 0, 0, 0, 0, 0, 0, 0]
 
     for i in range(0, 3):
         for j in range(0, 3):
-            arr[count] = [solv[i][j]]
-            count += 1
+            if solv[i][j] != 0:
+                arr[count] = [solv[i][j]]
+                count += 1
 
     inversions_count = inversions(arr)  # After converting the data to a 1D array we can count the number of Inversions
 
@@ -133,8 +134,8 @@ def calc_cost(node):
 
 
 
-def solve_8_puzzle(puzzle_array):
-    current_node = Node(0, get_manhattan_distance(puzzle_array, goal), None, "n", puzzle_array)
+def solve_8_puzzle(puzzle_array, heu):
+    current_node = Node(0, heu(puzzle_array, goal), None, "n", puzzle_array)
     node_list = [current_node, ]
     while current_node.h != 0:
         expand_node(current_node, node_list)
@@ -148,8 +149,8 @@ def solve_8_puzzle(puzzle_array):
 
 if __name__ == '__main__':
 
-    puzzle = np.random.choice(np.arange(9), size=(3, 3), replace=False)
-    # puzzle = np.array([[1, 2, 0], [3, 4, 5], [6, 7, 8]])
+    # puzzle = np.random.choice(np.arange(9), size=(3, 3), replace=False)
+    puzzle = np.array([[3, 1, 4], [6, 2, 7], [8, 0, 5]])
     for x in puzzle:
         print(x)
 
@@ -168,7 +169,13 @@ if __name__ == '__main__':
 
     if solvability(puzzle):
         print("Yes, solving continues")
-        solve_8_puzzle(puzzle)
+        type = input("if you want to solve with manhattan type m if you want to solve with hamming typ h: ")
+        if type == "m":
+            solve_8_puzzle(puzzle, get_manhattan_distance)
+        elif type == "h":
+            solve_8_puzzle(puzzle, get_hamming_distance)
+        else:
+            print("invalid input")
     else:
         print("Puzzle is not solvable, therefore program is terminated")
 
