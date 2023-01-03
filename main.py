@@ -1,48 +1,51 @@
 import numpy as np
 
-def find_pos(number,array):
-    for i in range (3):
+
+def find_pos(number, array):
+    for i in range(3):
         for j in range(3):
             if array[i][j] == number:
                 x = j
                 y = i
                 return x, y
 
+
 def manhattan_distance():
     sum = 0
-    for i in range(1,9):
+    for i in range(1, 9):
         x1, y1 = find_pos(i, puzzle)
         x2, y2 = find_pos(i, goal)
-        sum = sum +(abs(x1 - x2) + abs(y1 - y2))
+        sum = sum + (abs(x1 - x2) + abs(y1 - y2))
     return sum
 
-def Inversions(arr):
+
+def Inversions(arr):                                #8-Puzzle are only then solveable, if there is an even number of inversions. Therefore we count them before we try to solve the puzzle
     count = 0
 
-    for i in range (0, 9):
-        for j in range (i + 1, 9):
-            if arr[j] != 0 and arr[i] != 0 and arr[j] < arr[i]:
+    for i in range(0, 9):
+        for j in range(i + 1, 9):
+            if arr[j] < arr[i]:
                 count += 1
 
     return count
 
-def Solvability(puzzle):
 
+def Solvability(puzzle):                            #For the Inversion Function to work, we need a 1D Array. Because the puzzle is an 2D Array we need to convert the data.
     count = 0
-    arr = [0,0,0,0,0,0,0,0,0]
+    arr = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-    for i in range (0,3):
-        for j in range (0,3):
-
+    for i in range(0, 3):
+        for j in range(0, 3):
             arr[count] = [puzzle[i][j]]
             count += 1
 
-    inversions = Inversions(arr)
+    inversions = Inversions(arr)                   #After converting the data to a 1D array we can count the number of Inversions
 
-    if inversions % 2 == 0:
+    if inversions % 2 == 0:                        #If there are an even amount of inversions, the puzzle is solveable
         return True
     else:
         return False
+
 
 if __name__ == '__main__':
 
@@ -64,6 +67,6 @@ if __name__ == '__main__':
     print(emptyX, emptyY)
 
     if Solvability(puzzle):
-        print ("Yes, solving continious")
+        print("Yes, solving continious")
     else:
-        print ("Puzzle is not solveable therefore programm is terminated")
+        print("Puzzle is not solveable therefore programm is terminated")
