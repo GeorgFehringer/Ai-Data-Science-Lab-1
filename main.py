@@ -1,6 +1,18 @@
 import numpy as np
 
 
+class Node:
+    def __init__(self, g, h, previous_Node, previous_Move, previous_f, puzzle_array):
+        self.previous_Node = previous_Node
+        self.previous_Move = previous_Move
+        self.g = g
+        self.h = h
+        self.previous_f = previous_f
+        self.puzzle_array = puzzle_array
+
+
+
+
 def find_pos(number, array):
     for i in range(3):
         for j in range(3):
@@ -28,7 +40,7 @@ def get_manhattan_distance(puzzle_array, goal_array):
     return man_distance
 
 
-def inversions(arr):  # 8-Puzzle are only then solveable, if there is an even number of inversions. Therefore we count them before we try to solve the puzzle
+def inversions(arr):  # 8-Puzzle are only then solvable, if there is an even number of inversions. Therefore we count them before we try to solve the puzzle
     count = 0
 
     for i in range(0, 9):
