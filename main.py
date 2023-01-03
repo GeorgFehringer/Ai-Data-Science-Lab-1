@@ -35,7 +35,7 @@ def inversions(arr):
     # Input: and array Output: the number of inversions
     count = 0
 
-    for i in range(0, 9):
+    for i in range(0, 8):
         for j in range(i + 1, 8):
             if arr[j] < arr[i]:
                 count += 1
