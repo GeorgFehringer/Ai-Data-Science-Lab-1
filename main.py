@@ -10,15 +10,6 @@ def find_pos(number, array):
                 return xtest, ytest
 
 
-def manhattan_distance():
-    sum = 0
-    for i in range(1, 9):
-        x1, y1 = find_pos(i, puzzle)
-        x2, y2 = find_pos(i, goal)
-        sum = sum + (abs(x1 - x2) + abs(y1 - y2))
-    return sum
-
-
 def get_hamming_distance(puzzle, goal):
     sum = 0
     for i in range(0, 3):
@@ -31,15 +22,13 @@ def get_hamming_distance(puzzle, goal):
 def get_manhattan_distance(puzzle_array, goal_array):
     man_distance = 0
     for i in range(1, 9):
-        for i in range(1, 9):
-            x1, y1 = find_pos(i, puzzle_array)
-            x2, y2 = find_pos(i, goal_array)
-            man_distance = man_distance + (abs(x1 - x2) + abs(y1 - y2))
+        x1, y1 = find_pos(i, puzzle_array)
+        x2, y2 = find_pos(i, goal_array)
+        man_distance = man_distance + (abs(x1 - x2) + abs(y1 - y2))
     return man_distance
 
 
-def inversions(
-        arr):  # 8-Puzzle are only then solveable, if there is an even number of inversions. Therefore we count them before we try to solve the puzzle
+def inversions(arr):  # 8-Puzzle are only then solveable, if there is an even number of inversions. Therefore we count them before we try to solve the puzzle
     count = 0
 
     for i in range(0, 9):
