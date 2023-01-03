@@ -10,7 +10,6 @@ class Node:
         self.previous_f = previous_f
         self.puzzle_array = puzzle_array
 
-
 def find_pos(number, array):
     for i in range(3):
         for j in range(3):
@@ -104,6 +103,7 @@ if __name__ == '__main__':
 
     emptyX, emptyY = find_pos(0, puzzle)
     print(emptyX, emptyY)
+
 
     if solvability(puzzle):
         print("Yes, solving continues")
