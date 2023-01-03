@@ -3,8 +3,8 @@ import numpy as np
 
 class Node:
     def __init__(self, g, h, previous_node, previous_move, previous_f, puzzle_array):
-        self.previous_Node = previous_node
-        self.previous_Move = previous_move
+        self.previous_node = previous_node
+        self.previous_move = previous_move
         self.g = g
         self.h = h
         self.previous_f = previous_f
