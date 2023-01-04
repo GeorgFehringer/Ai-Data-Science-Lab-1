@@ -1,4 +1,4 @@
-import timeit
+import time
 import numpy as np
 
 h_time = np.zeros(100)
@@ -146,13 +146,13 @@ def solve_8_puzzle(puzzle_array, heu):
 
     current_node = Node(0, heu(puzzle_array, goal), None, "n", puzzle_array)
     node_list = [current_node, ]
-    start_time = timeit.timeit()
+    start_time = time.time()
     while current_node.h != 0:
         expand_node(current_node, node_list, heu)
         del node_list[0]
         node_list.sort(key=calc_cost)
         current_node = node_list[0]
-    end_time = timeit.timeit()
+    end_time = time.time()
     if heu == get_hamming_distance:
         h_time[counter_finished] = end_time - start_time
         h_nodes[counter_finished] = counter_expanded
@@ -167,7 +167,7 @@ def solve_all():
     while counter_finished < 100:
         puzzle = np.random.choice(np.arange(9), size=(3, 3), replace=False)
         if solvability(puzzle):
-            solve_8_puzzle(puzzle, get_hamming_distance)
+            #solve_8_puzzle(puzzle, get_hamming_distance)
             solve_8_puzzle(puzzle, get_manhattan_distance)
             counter_finished += 1
             print(counter_finished)
@@ -182,18 +182,6 @@ if __name__ == '__main__':
 #        print(x)
     goal = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
 
-
-    # if solvability(puzzle):
-    #     print("Yes, solving continues")
-    #     type = input("if you want to solve with manhattan type m if you want to solve with hamming typ h: ")
-    #     if type == "m":
-    #         solve_8_puzzle(puzzle, get_manhattan_distance)
-    #     elif type == "h":
-    #         solve_8_puzzle(puzzle, get_hamming_distance)
-    #     else:
-    #         print("invalid input")
-    # else:
-    #     print("Puzzle is not solvable, therefore program is terminated")
 
     solve_all()
 
