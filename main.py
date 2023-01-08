@@ -161,7 +161,7 @@ def get_manhattan_distance(puzzle_array_m, goal_array_m):
     # Input: 2 3x3 arrays one is the current and one is the goal state; Output: manhattan distance(int)
     # the manhattan distance is calculated by looking at the distance each number has from its correct position
     man_distance = 0
-    for i in range(1, 9):
+    for i in range(1, 8):
         x1, y1 = find_pos(i, puzzle_array_m)
         x2, y2 = find_pos(i, goal_array_m)
         man_distance = man_distance + (abs(x1 - x2) + abs(y1 - y2))
